@@ -104,21 +104,27 @@ function atualizarVisor() {
         <div class="display-line">
             <strong>MÁQUINA DE REFRIGERANTE</strong>
         </div>
-        <div class="display-line">
-            Preço: R$ 2,50
-        </div>
     `;
     
+    // Mostra o preço baseado no refrigerante selecionado
     if (selectedSoda) {
         html += `
-            <div class="display-line selected">
-                ► ${selectedSoda.sabor} selecionado
+            <div class="display-line">
+                Preço: R$ ${selectedSoda.preco ? selectedSoda.preco.toFixed(2) : '0,00'}
             </div>
         `;
     } else {
         html += `
             <div class="display-line">
                 Selecione um refrigerante
+            </div>
+        `;
+    }
+    
+    if (selectedSoda) {
+        html += `
+            <div class="display-line selected">
+                ► ${selectedSoda.sabor} selecionado
             </div>
         `;
     }

@@ -29,8 +29,8 @@ export class Store {
     constructor() {
         this.selectedSoda = null; // Refrigerante selecionado (apenas um)
         this.insertedAmount = 0; // Valor inserido em moedas
-        this.requiredAmount = 2.50; // Valor necessário para liberar
         this.listeners = []; // Para notificar mudanças
+        this.requiredAmount = this.selectedSoda ? this.selectedSoda.preco : 0;
     }
 
     /**
@@ -47,6 +47,7 @@ export class Store {
         }
         
         this.selectedSoda = refrigerante;
+        this.requiredAmount = this.selectedSoda.preco;
         this.notifyListeners();
         return { success: true };
     }
