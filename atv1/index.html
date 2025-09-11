@@ -3,19 +3,69 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Título da página</title>
+  <title>Loja de Refrigerantes</title>
   <meta name="description" content="">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-
-
-    <div>Ola Mundsssddddddo</div>
-
-    <ul id="lista-refrigerantes">
-
-    </ul>
+    <div class="container">
+        <header>
+            <h1>🥤 Máquina de Refrigerante</h1>
+        </header>
+        
+        <main>
+            <section class="products-section">
+                <h2>Produtos Disponíveis</h2>
+                <ul id="lista-refrigerantes">
+                    <!-- Produtos serão carregados aqui -->
+                </ul>
+            </section>
+            
+            <section class="coins-section-middle">
+                <h3>💰 Inserir Moedas</h3>
+                <div class="coins-buttons">
+                    <button class="coin-btn" data-coin="0.25">
+                        <span class="coin-value">R$ 0,25</span>
+                    </button>
+                    <button class="coin-btn" data-coin="0.50">
+                        <span class="coin-value">R$ 0,50</span>
+                    </button>
+                    <button class="coin-btn" data-coin="1.00">
+                        <span class="coin-value">R$ 1,00</span>
+                    </button>
+                </div>
+            </section>
+            
+            <aside class="machine-section">
+                <div class="machine-image">
+                    <img src="monster.jpg" alt="Monster Energy" />
+                </div>
+                
+                <div class="machine-display" id="machine-display">
+                    <div class="display-line">
+                        <strong>MÁQUINA DE REFRIGERANTE</strong>
+                    </div>
+                    <div class="display-line">
+                        Selecione um refrigerante
+                    </div>
+                </div>
+                
+                <div class="controls-section">
+                    <button id="release-btn" class="control-btn release-btn" disabled>
+                        🥤 Liberar Produto
+                    </button>
+                    <button id="cancel-btn" class="control-btn cancel-btn">
+                        ❌ Cancelar
+                    </button>
+                </div>
+                
+                <div id="message-area" class="message-area">
+                    <!-- Mensagens aparecem aqui -->
+                </div>
+            </aside>
+        </main>
+    </div>
 
     <script type="module" src="./app.js" defer></script>
 </body>

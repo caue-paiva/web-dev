@@ -1,45 +1,566 @@
+/* Reset e configurações gerais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2c3e50;
+  font-size: 2.5rem;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 300px 150px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .coins-section-middle .coins-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .coins-section-middle .coin-btn {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Seção de produtos */
+.products-section {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.products-section h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+}
+
 #lista-refrigerantes {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#lista-refrigerantes li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+}
+
+#lista-refrigerantes li:hover {
+  background: #f0f8ff;
+  border-color: #3498db;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#lista-refrigerantes li.selected {
+  background: #e8f5e8;
+  border-color: #27ae60;
+  border-width: 2px;
+  box-shadow: 0 0 15px rgba(39, 174, 96, 0.3);
+}
+
+#lista-refrigerantes li.selected .info span:first-child {
+  color: #27ae60;
+}
+
+#lista-refrigerantes li.selected::before {
+  content: "✅ ";
+  color: #27ae60;
+  font-weight: bold;
+}
+
+/* Container da miniatura */
+.thumb {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex: 0 0 50px;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  background: white;
+  padding: 4px;
+  border: 1px solid #ddd;
+}
+
+/* Botão invisível que cobre a imagem toda */
+.thumb-btn {
+  position: absolute;
+  inset: 0;
+  background: rgba(52, 152, 219, 0.1);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.thumb-btn:hover {
+  opacity: 1;
+  border-color: #3498db;
+  background: rgba(52, 152, 219, 0.2);
+}
+
+.thumb-btn:focus-visible {
+  outline: none;
+  opacity: 1;
+  border-color: #3498db;
+  background: rgba(52, 152, 219, 0.2);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-grow: 1;
+}
+
+.info span:first-child {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #2c3e50;
+}
+
+.preco {
+  color: #27ae60;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* Seção de moedas no meio */
+.coins-section-middle {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.coins-section-middle h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  border-bottom: 2px solid #f39c12;
+  padding-bottom: 8px;
+}
+
+.coins-section-middle .coins-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.coins-section-middle .coin-btn {
+  background: linear-gradient(145deg, #f39c12, #e67e22);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.coins-section-middle .coin-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+  background: linear-gradient(145deg, #e67e22, #d35400);
+}
+
+.coins-section-middle .coin-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.coins-section-middle .coin-value {
+  font-size: 0.85rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Seção da máquina */
+.machine-section {
+  background: linear-gradient(145deg, #2c3e50, #34495e);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  position: sticky;
+  top: 20px;
+  color: white;
+  text-align: center;
+}
+
+/* Imagem da máquina */
+.machine-image {
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: fit-content;
+}
+
+.machine-image img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 350px;
+  border-radius: 6px;
+  object-fit: contain;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Visor da máquina */
+.machine-display {
+  background: #000;
+  color: #00ff00;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-family: 'Courier New', monospace;
+  border: 3px solid #444;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.display-line {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.display-line strong {
+  color: #00ff00;
+}
+
+.display-line.selected {
+  color: #ffff00;
+  font-weight: bold;
+}
+
+.display-line.amount {
+  color: #00ffff;
+  font-weight: bold;
+}
+
+.display-line.remaining {
+  color: #ff8800;
+}
+
+.display-line.ready {
+  color: #00ff00;
+  font-weight: bold;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+/* Efeitos especiais do visor na liberação */
+.machine-display.release-animation {
+  background: linear-gradient(45deg, #000, #001100, #000);
+  border-color: #00ff00;
+  box-shadow: 
+    inset 0 0 10px rgba(0,0,0,0.5),
+    0 0 20px rgba(0, 255, 0, 0.5);
+  animation: displayCelebration 10s ease-in-out;
+}
+
+.display-line.release-display {
+  color: #00ff00;
+  font-weight: bold;
+  font-size: 1rem;
+  animation: textGlow 1s infinite;
+}
+
+.display-line.change-display {
+  color: #ffff00;
+  font-weight: bold;
+  font-size: 1.1rem;
+  animation: changeBlink 0.8s infinite;
+  background: rgba(255, 255, 0, 0.1);
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ffff00;
+}
+
+@keyframes displayCelebration {
+  0%, 100% { 
+    background: #000;
+    transform: scale(1);
   }
-  #lista-refrigerantes li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 6px 0;
+  25% { 
+    background: linear-gradient(45deg, #001100, #002200, #001100);
+    transform: scale(1.02);
   }
-  
-  /* Container da miniatura */
-  .thumb {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    flex: 0 0 40px;
+  50% { 
+    background: linear-gradient(45deg, #002200, #003300, #002200);
+    transform: scale(1.05);
   }
-  .thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* não corta */
-    border-radius: 8px;
-    background: white;
-    padding: 2px;
+  75% { 
+    background: linear-gradient(45deg, #001100, #002200, #001100);
+    transform: scale(1.02);
   }
-  
-  /* Botão invisível que cobre a imagem toda */
-  .thumb-btn {
-    position: absolute;
-    inset: 0;              /* top right bottom left = 0 */
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-    opacity: 0;            /* invisível */
+}
+
+@keyframes textGlow {
+  0%, 100% { 
+    text-shadow: 0 0 5px #00ff00;
+    color: #00ff00;
   }
-  
-  /* Acessibilidade: ao focar via teclado, mostra contorno */
-  .thumb-btn:focus-visible {
-    outline: 2px solid #333;
-    outline-offset: 2px;
-    opacity: 0.1;          /* levemente visível no foco */
+  50% { 
+    text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00;
+    color: #88ff88;
   }
+}
+
+@keyframes changeBlink {
+  0%, 100% { 
+    color: #ffff00;
+    box-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+  }
+  50% { 
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+  }
+}
+
+/* Seção de controles */
+.controls-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.control-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.release-btn {
+  background: #95a5a6;
+  color: #7f8c8d;
+}
+
+.release-btn.ready {
+  background: linear-gradient(145deg, #27ae60, #2ecc71);
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.release-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cancel-btn {
+  background: linear-gradient(145deg, #e74c3c, #c0392b);
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: linear-gradient(145deg, #c0392b, #a93226);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Área de mensagens */
+.message-area {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message {
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: 500;
+  text-align: center;
+  animation: slideIn 0.3s ease;
+}
+
+.message.success {
+  background: rgba(39, 174, 96, 0.9);
+  color: white;
+}
+
+.message.error {
+  background: rgba(231, 76, 60, 0.9);
+  color: white;
+}
+
+.message.info {
+  background: rgba(52, 152, 219, 0.9);
+  color: white;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Efeitos especiais de liberação */
+.release-success {
+  background: linear-gradient(145deg, #27ae60, #2ecc71);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+  animation: releaseEffect 0.6s ease-out;
+  border: 3px solid #fff;
+}
+
+.release-logo {
+  margin-bottom: 15px;
+  animation: logoSpin 4s ease-in-out;
+}
+
+.release-logo img {
+  max-width: 120px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.release-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  animation: bounce 2s infinite;
+}
+
+.release-message {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.change-info {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid #fff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  animation: glow 3s infinite;
+}
+
+.change-info strong {
+  color: #fff200;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Efeito de celebração para a área de mensagens */
+.message-area.celebration {
+  transform: scale(1.05);
+  animation: celebration 0.6s ease-out;
+}
+
+@keyframes releaseEffect {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.5) translateY(-20px); 
+  }
+  50% { 
+    transform: scale(1.1) translateY(-5px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+}
+
+@keyframes celebration {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes logoSpin {
+  0% { 
+    transform: scale(0.5) rotate(-180deg);
+    opacity: 0;
+  }
+  50% { 
+    transform: scale(1.1) rotate(0deg);
+    opacity: 1;
+  }
+  100% { 
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
   

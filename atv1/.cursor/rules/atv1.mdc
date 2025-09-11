@@ -1,0 +1,41 @@
+---
+description: Project rules for atv1, showing how you should develop a web application according to the correct specification
+globs: 
+alwaysApply: true
+---
+
+# Atividade 1 — Máquina de Refrigerante
+
+**Disciplina:** SCC0219 - Introdução ao Desenvolvimento Web  
+**Instituição:** Universidade de São Paulo — ICMC  
+**Semestre:** 2º/2025  
+
+## Objetivo  
+Implementar uma **máquina de refrigerante** em **HTML, CSS e JavaScript** seguindo os requisitos especificados.  
+
+## Requisitos  
+
+- **Dados**:  
+  - Lista de refrigerantes e sabores disponível via **Web Service**:  
+    `https://api.jsonbin.io/v3/b/68b9f743d0ea881f4071dd7f`  
+  - Listar opções usando **AJAX**.  
+
+- **Interação com o usuário**:  
+  - Seleção do refrigerante por **botões**.  
+  - Inserção de moedas por **drag and drop**.  
+
+- **Moedas aceitas**:  
+  - R$ 0,25  
+  - R$ 0,50  
+  - R$ 1,00  
+
+- **Pagamento e liberação**:  
+  - Valor necessário: **R$ 2,50** (qualquer combinação de moedas).  
+  - Exibir mensagem:  
+    - `"Refrigerante [nome] liberado"` quando pago corretamente.  
+    - Informar **troco**, se o valor exceder.  
+
+- **Restrições**:  
+  - Não utilizar `alert()`.  
+  - O visor deve atualizar o valor inserido em tempo real.  
+  - Layout livre — **criatividade é encorajada**.  
