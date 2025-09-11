@@ -186,11 +186,21 @@ function mostrarMensagem(mensagem, tipo = 'info') {
     const messageArea = document.getElementById('message-area');
     if (!messageArea) return;
     
+    // Não sobrescreve se há uma animação de liberação ativa
+    if (suspenderAtualizacoes || popupLiberacaoAtivo) {
+        console.log(`Mensagem bloqueada durante animação: ${mensagem}`);
+        return;
+    }
+    
+    console.log(`Mostrando mensagem: ${mensagem} (tipo: ${tipo})`);
     messageArea.innerHTML = `<div class="message ${tipo}">${mensagem}</div>`;
     
     // Remove a mensagem após 3 segundos
     setTimeout(() => {
-        messageArea.innerHTML = '';
+        // Só remove se não há animação ativa
+        if (!suspenderAtualizacoes && !popupLiberacaoAtivo) {
+            messageArea.innerHTML = '';
+        }
     }, 3000);
 }
 
@@ -227,6 +237,13 @@ function mostrarLiberacaoComEfeito(mensagem, troco) {
     
     if (!messageArea) return;
     
+    // Suspende atualizações da interface durante a animação
+    console.log('Suspendendo atualizações da interface para animação de liberação');
+    suspenderAtualizacoes = true;
+    popupLiberacaoAtivo = true;
+    
+    console.log('Estado da messageArea antes do popup:', messageArea.innerHTML);
+    
     // Efeito especial no visor da máquina
     if (display) {
         display.innerHTML = `
@@ -244,12 +261,21 @@ function mostrarLiberacaoComEfeito(mensagem, troco) {
         `;
         display.classList.add('release-animation');
         
-        // Remove o efeito do visor após 12 segundos
+        // Remove o efeito do visor após 4 segundos
         setTimeout(() => {
+            console.log('Reativando atualizações após animação do visor');
             display.classList.remove('release-animation');
-            // Atualiza o visor após a animação terminar
+            // Reativa atualizações e atualiza o visor
+            suspenderAtualizacoes = false;
             atualizarVisor();
-        }, 12000);
+        }, 4000);
+    } else {
+        // Se não há visor, reativa atualizações após 4 segundos
+        setTimeout(() => {
+            console.log('Reativando atualizações (sem visor)');
+            suspenderAtualizacoes = false;
+            atualizarInterface();
+        }, 4000);
     }
     
     // Cria mensagem de liberação com efeito especial
@@ -273,15 +299,35 @@ function mostrarLiberacaoComEfeito(mensagem, troco) {
     html += `</div>`;
     
     messageArea.innerHTML = html;
+    console.log('Popup de liberação definido na messageArea');
+    console.log('Conteúdo do popup:', html.substring(0, 100) + '...');
     
     // Adiciona efeito de celebração
     messageArea.classList.add('celebration');
     
-    // Remove após 15 segundos
+    // Verifica se o popup ainda está lá após 1 segundo
     setTimeout(() => {
+        console.log('Verificação após 1s - conteúdo da messageArea:', messageArea.innerHTML.substring(0, 100));
+        console.log('Popup ainda ativo?', popupLiberacaoAtivo);
+        console.log('Atualizações suspensas?', suspenderAtualizacoes);
+    }, 1000);
+    
+    // Verifica novamente após 2 segundos
+    setTimeout(() => {
+        console.log('Verificação após 2s - conteúdo da messageArea:', messageArea.innerHTML.substring(0, 100));
+    }, 2000);
+    
+    // Remove após 5 segundos
+    setTimeout(() => {
+        console.log('Finalizando popup de liberação');
         messageArea.innerHTML = '';
         messageArea.classList.remove('celebration');
-    }, 15000);
+        
+        // Garante que atualizações sejam reativadas mesmo se algo der errado
+        suspenderAtualizacoes = false;
+        popupLiberacaoAtivo = false;
+        atualizarInterface();
+    }, 5000);
 }
 
 // Função para cancelar compra
@@ -291,15 +337,10 @@ function cancelarCompra() {
     atualizarInterface();
 }
 
-// Adiciona event listeners para os botões
+// Adiciona event listeners para os botões e drag & drop
 function adicionarEventListeners() {
-    // Botões de moedas
-    document.querySelectorAll('.coin-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const valor = parseFloat(btn.dataset.coin);
-            inserirMoeda(valor);
-        });
-    });
+    // Event listeners para drag & drop das moedas
+    adicionarEventListenersDragDrop();
     
     // Botão de liberar produto
     const releaseBtn = document.getElementById('release-btn');
@@ -314,8 +355,105 @@ function adicionarEventListeners() {
     }
 }
 
+// Event listeners para drag & drop
+function adicionarEventListenersDragDrop() {
+    // Event listeners para as moedas (drag source)
+    document.querySelectorAll('.coin').forEach(coin => {
+        coin.addEventListener('dragstart', handleDragStart);
+        coin.addEventListener('dragend', handleDragEnd);
+    });
+    
+    // Event listeners para a zona de drop (máquina)
+    const dropZone = document.getElementById('drop-zone');
+    if (dropZone) {
+        dropZone.addEventListener('dragover', handleDragOver);
+        dropZone.addEventListener('dragenter', handleDragEnter);
+        dropZone.addEventListener('dragleave', handleDragLeave);
+        dropZone.addEventListener('drop', handleDrop);
+    }
+}
+
+// Variável para armazenar dados da moeda sendo arrastada
+let draggedCoinValue = null;
+
+// Handlers para drag & drop
+function handleDragStart(e) {
+    const coinValue = parseFloat(e.target.dataset.coin);
+    draggedCoinValue = coinValue;
+    
+    e.target.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'copy';
+    e.dataTransfer.setData('text/plain', coinValue.toString());
+    
+    console.log(`Iniciando drag da moeda: R$ ${coinValue.toFixed(2)}`);
+}
+
+function handleDragEnd(e) {
+    e.target.classList.remove('dragging');
+    draggedCoinValue = null;
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+}
+
+function handleDragEnter(e) {
+    e.preventDefault();
+    e.target.closest('.machine-section').classList.add('drag-over');
+}
+
+function handleDragLeave(e) {
+    // Remove o efeito apenas se sair completamente da área
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+        e.target.closest('.machine-section').classList.remove('drag-over');
+    }
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    const dropZone = e.target.closest('.machine-section');
+    dropZone.classList.remove('drag-over');
+    
+    const coinValue = parseFloat(e.dataTransfer.getData('text/plain'));
+    
+    if (coinValue && draggedCoinValue === coinValue) {
+        console.log(`Moeda dropada: R$ ${coinValue.toFixed(2)}`);
+        
+        // Efeito visual de sucesso na drop zone
+        dropZone.classList.add('drop-success');
+        setTimeout(() => {
+            dropZone.classList.remove('drop-success');
+        }, 600);
+        
+        inserirMoeda(coinValue);
+        
+        // Feedback na área de mensagens (só se não há animação ativa)
+        if (!suspenderAtualizacoes && !popupLiberacaoAtivo) {
+            mostrarMensagem(`💰 Moeda de R$ ${coinValue.toFixed(2)} inserida!`, 'success');
+        } else {
+            console.log('Feedback de moeda bloqueado - popup de liberação ativo');
+        }
+    }
+}
+
+// Flag para controlar atualizações da interface
+let suspenderAtualizacoes = false;
+
+// Flag específica para popup de liberação ativo
+let popupLiberacaoAtivo = false;
+
+// Função wrapper para atualizações condicionais
+function atualizarInterfaceCondicional() {
+    if (!suspenderAtualizacoes) {
+        atualizarInterface();
+    } else {
+        console.log('Atualizações suspensas - ignorando notificação do store');
+    }
+}
+
 // Adiciona listener para mudanças no store
-store.addListener(atualizarInterface);
+store.addListener(atualizarInterfaceCondicional);
 
 window.addEventListener("DOMContentLoaded", () => {
     popularLista();

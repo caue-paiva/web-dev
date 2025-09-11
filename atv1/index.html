@@ -24,23 +24,25 @@
             
             <section class="coins-section-middle">
                 <h3>💰 Inserir Moedas</h3>
-                <div class="coins-buttons">
-                    <button class="coin-btn" data-coin="0.25">
+                <div class="coins-container">
+                    <div class="coin" draggable="true" data-coin="0.25">
                         <span class="coin-value">R$ 0,25</span>
-                    </button>
-                    <button class="coin-btn" data-coin="0.50">
+                    </div>
+                    <div class="coin" draggable="true" data-coin="0.50">
                         <span class="coin-value">R$ 0,50</span>
-                    </button>
-                    <button class="coin-btn" data-coin="1.00">
+                    </div>
+                    <div class="coin" draggable="true" data-coin="1.00">
                         <span class="coin-value">R$ 1,00</span>
-                    </button>
+                    </div>
                 </div>
             </section>
             
-            <aside class="machine-section">
+            <aside class="machine-section" id="drop-zone">
                 <div class="machine-image">
                     <img src="monster.jpg" alt="Monster Energy" />
                 </div>
+                
+                <div class="drop-indicator">Arraste as moedas aqui</div>
                 
                 <div class="machine-display" id="machine-display">
                     <div class="display-line">

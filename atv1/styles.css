@@ -38,13 +38,13 @@ main {
     gap: 15px;
   }
   
-  .coins-section-middle .coins-buttons {
+  .coins-section-middle .coins-container {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
   }
   
-  .coins-section-middle .coin-btn {
+  .coins-section-middle .coin {
     width: 60px;
     height: 60px;
   }
@@ -186,43 +186,48 @@ main {
   padding-bottom: 8px;
 }
 
-.coins-section-middle .coins-buttons {
+.coins-section-middle .coins-container {
   display: flex;
   flex-direction: column;
   gap: 12px;
   align-items: center;
 }
 
-.coins-section-middle .coin-btn {
+.coins-section-middle .coin {
   background: linear-gradient(145deg, #f39c12, #e67e22);
   color: white;
   border: none;
   border-radius: 50%;
   width: 70px;
   height: 70px;
-  cursor: pointer;
+  cursor: grab;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  user-select: none;
 }
 
-.coins-section-middle .coin-btn:hover {
+.coins-section-middle .coin:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.4);
   background: linear-gradient(145deg, #e67e22, #d35400);
 }
 
-.coins-section-middle .coin-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+.coins-section-middle .coin:active,
+.coins-section-middle .coin.dragging {
+  cursor: grabbing;
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  z-index: 1000;
 }
 
 .coins-section-middle .coin-value {
   font-size: 0.85rem;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  pointer-events: none;
 }
 
 /* Seção da máquina */
@@ -235,6 +240,58 @@ main {
   top: 20px;
   color: white;
   text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* Drop zone states */
+.machine-section.drag-over {
+  background: linear-gradient(145deg, #27ae60, #2ecc71);
+  box-shadow: 0 0 30px rgba(39, 174, 96, 0.6);
+  transform: scale(1.02);
+  border: 3px dashed #fff;
+}
+
+/* Indicador de drop */
+.drop-indicator {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.machine-section.drag-over .drop-indicator {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  color: #fff;
+  opacity: 1;
+  animation: pulse 1s infinite;
+}
+
+/* Efeito de sucesso ao dropar moeda */
+.machine-section.drop-success {
+  background: linear-gradient(145deg, #f39c12, #e67e22);
+  box-shadow: 0 0 40px rgba(243, 156, 18, 0.8);
+  animation: dropSuccess 0.6s ease-out;
+}
+
+@keyframes dropSuccess {
+  0% { 
+    transform: scale(1);
+    background: linear-gradient(145deg, #2c3e50, #34495e);
+  }
+  50% { 
+    transform: scale(1.05);
+    background: linear-gradient(145deg, #f39c12, #e67e22);
+  }
+  100% { 
+    transform: scale(1);
+    background: linear-gradient(145deg, #f39c12, #e67e22);
+  }
 }
 
 /* Imagem da máquina */
@@ -311,7 +368,7 @@ main {
   box-shadow: 
     inset 0 0 10px rgba(0,0,0,0.5),
     0 0 20px rgba(0, 255, 0, 0.5);
-  animation: displayCelebration 10s ease-in-out;
+  animation: displayCelebration 3s ease-in-out;
 }
 
 .display-line.release-display {
@@ -472,7 +529,7 @@ main {
 
 .release-logo {
   margin-bottom: 15px;
-  animation: logoSpin 4s ease-in-out;
+  animation: logoSpin 2s ease-in-out;
 }
 
 .release-logo img {
@@ -488,7 +545,7 @@ main {
   font-weight: bold;
   margin-bottom: 10px;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  animation: bounce 2s infinite;
+  animation: bounce 1s infinite;
 }
 
 .release-message {
@@ -504,7 +561,7 @@ main {
   padding: 10px;
   margin-top: 10px;
   font-size: 1.1rem;
-  animation: glow 3s infinite;
+  animation: glow 1.5s infinite;
 }
 
 .change-info strong {
