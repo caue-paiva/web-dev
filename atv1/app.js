@@ -21,7 +21,6 @@ async function popularLista() {
     lista.innerHTML = ""; 
 
     const dados = await fetchRefrigerantesDisponiveis();
-    console.log(dados)
     const refrigerantes = dados.record.bebidas || [];
 
     if (refrigerantes.length === 0) {
@@ -310,18 +309,6 @@ function mostrarLiberacaoComEfeito(mensagem, troco) {
     
     // Adiciona efeito de celebração
     messageArea.classList.add('celebration');
-    
-    // Verifica se o popup ainda está lá após 1 segundo
-    setTimeout(() => {
-        console.log('Verificação após 1s - conteúdo da messageArea:', messageArea.innerHTML.substring(0, 100));
-        console.log('Popup ainda ativo?', popupLiberacaoAtivo);
-        console.log('Atualizações suspensas?', suspenderAtualizacoes);
-    }, 1000);
-    
-    // Verifica novamente após 2 segundos
-    setTimeout(() => {
-        console.log('Verificação após 2s - conteúdo da messageArea:', messageArea.innerHTML.substring(0, 100));
-    }, 2000);
     
     // Remove após 5 segundos
     setTimeout(() => {
