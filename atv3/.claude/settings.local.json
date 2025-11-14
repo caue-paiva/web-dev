@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create vite@latest client -- --template react-ts)",
+      "Bash(npm install)",
+      "Bash(npm install react-router-dom)",
+      "Bash(curl http://localhost:3000/api/potions)",
+      "Bash(curl -s http://localhost:5173/)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
