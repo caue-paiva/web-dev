@@ -7,7 +7,7 @@ const HistorySection = () => {
           <div className="history-text">
             <p className="history-year">Fundada em 1867</p>
             <p>
-              Há mais de um século e meio, nossa loja foi fundada por Ágatha Morgenstern,
+              Há mais de um século e meio, nossa loja foi fundada por Annabelle Merigold,
               uma renomada alquimista que dedicou sua vida ao estudo das artes místicas.
               Desde então, nossa família tem mantido viva a tradição de criar poções
               da mais alta qualidade, usando apenas ingredientes selecionados e fórmulas

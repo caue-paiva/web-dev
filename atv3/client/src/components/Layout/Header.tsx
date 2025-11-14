@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -9,8 +9,19 @@ const Header = () => {
           <span className="founded">Est. 1867</span>
         </div>
         <nav className="nav">
-          <Link to="/" className="nav-link">Loja</Link>
-          <Link to="/admin" className="nav-link">Administração</Link>
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+          >
+            Loja
+          </NavLink>
+          <NavLink
+            to="/admin"
+            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+          >
+            Administração
+          </NavLink>
         </nav>
       </div>
     </header>
