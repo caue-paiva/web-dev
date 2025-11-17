@@ -1,12 +1,15 @@
 import type { Potion } from '../../types';
+import { useNotification } from '../../contexts/NotificationContext';
 
 interface PotionCardProps {
   potion: Potion;
 }
 
 const PotionCard = ({ potion }: PotionCardProps) => {
+  const { addNotification } = useNotification();
+
   const handleBuy = () => {
-    alert(`Funcionalidade de compra ainda não implementada.\n\nPoção: ${potion.nome}\nPreço: R$ ${potion.preco.toFixed(2)}`);
+    addNotification(`${potion.nome} adicionado ao carrinho!`, 'success');
   };
 
   return (
