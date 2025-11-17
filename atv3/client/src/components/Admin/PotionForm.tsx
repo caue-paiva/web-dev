@@ -1,12 +1,14 @@
 import { useState, FormEvent } from 'react';
 import type { Potion } from '../../types';
 import { apiService } from '../../services/api';
+import { useNotification } from '../../contexts/NotificationContext';
 
 interface PotionFormProps {
   onPotionAdded?: () => void;
 }
 
 const PotionForm = ({ onPotionAdded }: PotionFormProps) => {
+  const { addNotification } = useNotification();
   const [formData, setFormData] = useState<Omit<Potion, 'id'>>({
     nome: '',
     descricao: '',
@@ -52,7 +54,7 @@ const PotionForm = ({ onPotionAdded }: PotionFormProps) => {
     try {
       setIsSubmitting(true);
       await apiService.createPotion(formData);
-      alert('Poção cadastrada com sucesso!');
+      addNotification('Poção cadastrada com sucesso!', 'success');
 
       // Reset form
       setFormData({
@@ -68,7 +70,7 @@ const PotionForm = ({ onPotionAdded }: PotionFormProps) => {
       }
     } catch (error) {
       console.error('Erro ao cadastrar poção:', error);
-      alert('Erro ao cadastrar poção. Tente novamente.');
+      addNotification('Erro ao cadastrar poção. Tente novamente.', 'error');
     } finally {
       setIsSubmitting(false);
     }

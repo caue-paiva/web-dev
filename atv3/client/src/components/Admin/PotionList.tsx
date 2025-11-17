@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import type { Potion } from '../../types';
 import { apiService } from '../../services/api';
+import { useNotification } from '../../contexts/NotificationContext';
 
 interface PotionListProps {
   refreshTrigger?: number;
 }
 
 const PotionList = ({ refreshTrigger }: PotionListProps) => {
+  const { addNotification } = useNotification();
   const [potions, setPotions] = useState<Potion[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,17 +32,13 @@ const PotionList = ({ refreshTrigger }: PotionListProps) => {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm('Tem certeza que deseja remover esta poção?')) {
-      return;
-    }
-
     try {
       await apiService.deletePotion(id);
       setPotions(potions.filter((p) => p.id !== id));
-      alert('Poção removida com sucesso!');
+      addNotification('Poção removida com sucesso!', 'success');
     } catch (error) {
       console.error('Erro ao remover poção:', error);
-      alert('Erro ao remover poção. Tente novamente.');
+      addNotification('Erro ao remover poção. Tente novamente.', 'error');
     }
   };
 

@@ -14,7 +14,7 @@ const HistorySection = () => {
               centenárias.
             </p>
             <p>
-              Localizada no coração histórico da cidade, nossa loja se tornou
+              Localizada no beco vertical, nossa loja se tornou
               um ponto de referência para aqueles que buscam soluções mágicas
               para seus desafios cotidianos. Cada poção é cuidadosamente preparada
               seguindo rigorosos padrões de qualidade e pureza.

@@ -1,5 +1,47 @@
 # Especificação do Sistema "Poções e Soluções"
 
+## Como Executar o Projeto
+
+### Backend (Servidor)
+```bash
+cd server
+npm install        # Instalar dependências (apenas na primeira vez)
+npm run dev        # Iniciar o servidor
+```
+
+O backend roda na **porta 3000** (servidor Express com banco SQLite).
+
+### Frontend (Cliente)
+Abra um **novo terminal** e execute:
+```bash
+cd client
+npm install        # Instalar dependências (apenas na primeira vez)
+npm run dev        # Iniciar o servidor de desenvolvimento
+```
+
+O frontend roda na **porta 5173** (servidor de desenvolvimento Vite).
+
+### Início Rápido (ambos ao mesmo tempo)
+Você pode executar ambos em paralelo usando duas janelas de terminal:
+
+**Terminal 1:**
+```bash
+cd server && npm run dev
+```
+
+**Terminal 2:**
+```bash
+cd client && npm run dev
+```
+
+Uma vez que ambos estiverem rodando:
+- **Frontend (Loja/Admin)**: http://localhost:5173
+- **Backend API**: http://localhost:3000/api/potions
+
+O frontend irá consumir a API do backend para exibir e gerenciar as poções.
+
+---
+
 ## 1. Visão geral
 
 O sistema "Poções e Soluções" é composto por:
