@@ -30,7 +30,7 @@ const HistorySection = () => {
             </div>
             <div className="history-image">
               <img
-                src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&h=300&fit=crop"
+                src="/ingredients.png"
                 alt="Ingredientes alquímicos"
               />
               <p className="image-caption">Ingredientes raros e preciosos</p>

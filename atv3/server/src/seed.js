@@ -12,7 +12,7 @@ const seedPotions = async () => {
       {
         nome: 'Elixir da Sabedoria',
         descricao: 'Aumenta temporariamente a clareza mental e capacidade de aprendizado. Ideal para estudos e decisões importantes.',
-        imagemUrl: 'https://images.unsplash.com/photo-1603909075272-19b6aa0ae25f?w=300&h=300&fit=crop',
+        imagemUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG',
         preco: 200.00,
       },
       {
@@ -36,7 +36,7 @@ const seedPotions = async () => {
       {
         nome: 'Antídoto Universal',
         descricao: 'Neutraliza qualquer veneno conhecido. Essencial para viajantes e aventureiros. Ingrediente raro: bezoar.',
-        imagemUrl: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=300&h=300&fit=crop',
+        imagemUrl: 'https://sobotanical.com/cdn/shop/products/panacea_1680x.jpg',
         preco: 300.00,
       },
     ];
