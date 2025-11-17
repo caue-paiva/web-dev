@@ -6,7 +6,7 @@
 ```bash
 cd server
 npm install        # Instalar dependências (apenas na primeira vez)
-npm run dev        # Iniciar o servidor
+npm run dev        # Iniciar o servidor em modo desenvolvimento
 ```
 
 O backend roda na **porta 3000** (servidor Express com banco SQLite).
@@ -154,7 +154,7 @@ A página principal deve ter um rodapé com:
 **RNF-01**  
 O front-end deve ser desenvolvido em React, usando Vite como bundler.
 
-**RNF-02**  
+**RNF-02**
 O backend deve ser desenvolvido em NodeJS (Express) e usar Sequelize para acesso ao banco.
 
 **RNF-03**  
@@ -180,13 +180,15 @@ A comunicação entre front-end e backend deve ser feita via chamadas HTTP usand
 pocoes-e-solucoes/
   server/
     src/
-      index.js        # entrada do servidor Express
-      db.js           # conexão Sequelize com SQLite
+      index.ts        # entrada do servidor Express
+      db.ts           # conexão Sequelize com SQLite
       models/
-        Potion.js
+        Potion.ts     # modelo de dados
       routes/
-        potions.js
-      seed.js         # carga inicial de poções
+        potions.ts    # rotas da API com tipos
+      seed.ts         # dados iniciais de poções
+    tsconfig.json     # configuração do TypeScript
+    dist/             # arquivos compilados 
   client/
     src/
       main.tsx ou main.jsx
