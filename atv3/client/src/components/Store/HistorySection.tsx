@@ -23,7 +23,7 @@ const HistorySection = () => {
           <div className="history-images">
             <div className="history-image">
               <img
-                src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=400&h=300&fit=crop"
+                src="/lab.png"
                 alt="Laboratório de alquimia antigo"
               />
               <p className="image-caption">Nosso laboratório original, 1867</p>

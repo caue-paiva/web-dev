@@ -6,7 +6,7 @@ const seedPotions = async () => {
       {
         nome: 'Poção de Cura Maior',
         descricao: 'Restaura completamente a saúde e cura ferimentos graves. Ingredientes: raiz de mandrágora, lágrimas de fênix.',
-        imagemUrl: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=300&h=300&fit=crop',
+        imagemUrl: 'https://static.wikia.nocookie.net/fortnite/images/d/d9/Shield_Potion_-_Item_-_Fortnite.png',
         preco: 150.00,
       },
       {
@@ -18,19 +18,19 @@ const seedPotions = async () => {
       {
         nome: 'Poção de Invisibilidade',
         descricao: 'Torna o usuário invisível por até 1 hora. Efeito pode variar conforme peso corporal. Uso com cautela.',
-        imagemUrl: 'https://images.unsplash.com/photo-1612528443702-f6741f70a049?w=300&h=300&fit=crop',
+        imagemUrl: 'https://portal.loft.com.br/wp-content/uploads/2023/09/o-que-e-parede-de-gesso-e-como-fazer.jpg',
         preco: 350.00,
       },
       {
         nome: 'Elixir da Sorte',
         descricao: 'Aumenta significativamente a probabilidade de sucesso em qualquer empreendimento por 24 horas.',
-        imagemUrl: 'https://images.unsplash.com/photo-1605256948056-24b37174c10b?w=300&h=300&fit=crop',
+        imagemUrl: 'https://static.wikia.nocookie.net/roblox-immortal-luck/images/4/44/Luck_Potion.png',
         preco: 500.00,
       },
       {
         nome: 'Poção de Força Titânica',
         descricao: 'Concede força sobre-humana por 2 horas. Ideal para trabalhos pesados ou situações de emergência.',
-        imagemUrl: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=300&h=300&fit=crop',
+        imagemUrl: 'https://www.sfpesca.com.br/produtos/original/quick-shake-1200-500604-23051.jpg',
         preco: 175.00,
       },
       {
